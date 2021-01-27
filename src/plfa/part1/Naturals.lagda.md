@@ -1061,6 +1061,13 @@ _ =
     ⟨⟩ I O O
   ∎
 ```
+```
+--- Convert from Binary to Natural
+from : Bin → ℕ
+from ⟨⟩ = 0
+from (⟨⟩ O) = 0
+--- from (inc n) = suc (from n)
+```
 
 
 
