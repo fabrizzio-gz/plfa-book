@@ -613,7 +613,32 @@ _ =
 Compute `5 ∸ 3` and `3 ∸ 5`, writing out your reasoning as a chain of equations.
 
 ```
--- Your code goes here
+_ =
+  begin
+    5 ∸ 3
+  ≡⟨⟩
+    4 ∸ 2
+  ≡⟨⟩
+    3 ∸ 1
+  ≡⟨⟩
+    2 ∸ 0
+  ≡⟨⟩
+    2
+  ∎
+- =
+  begin
+    3 ∸ 5
+  ≡⟨⟩
+    2 ∸ 4
+  ≡⟨⟩
+    1 ∸ 3
+  ≡⟨⟩
+    0 ∸ 2
+  ≡⟨⟩
+    0 ∸ (suc 1)
+  ≡⟨⟩
+    0
+  ∎
 ```
 
 
