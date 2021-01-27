@@ -826,6 +826,7 @@ and proofs interactively.
 
 Begin by typing:
 
+
     _+_ : ℕ → ℕ → ℕ
     m + n = ?
 
@@ -969,7 +970,7 @@ Define a function
 that converts a bitstring to the bitstring for the next higher
 number.  For example, since `1100` encodes twelve, we should have:
 
-    inc (⟨⟩ I O I I) ≡ ⟨⟩ I I O O
+    inc (⟨⟩ I O I I) ≡ ⟨⟩ I I O O 
 
 Confirm that this gives the correct answer for the bitstrings
 encoding zero through four.
@@ -985,8 +986,47 @@ represents a positive natural, and represent zero by `⟨⟩ O`.
 Confirm that these both give the correct answer for zero through four.
 
 ```
--- Your code goes here
+--- Definition
+inc : Bin → Bin
+inc ⟨⟩ = ⟨⟩
+inc (⟨⟩ O) = ⟨⟩ I
+inc (⟨⟩ I) = ⟨⟩ I O
+inc (n I) = inc(n) O
+inc (n O) = n I
 ```
+```
+--- Prove for 0
+_ : inc(⟨⟩ O O O O) ≡ ⟨⟩ O O O I
+_ =
+  begin
+    ⟨⟩ O O O I
+  ∎
+--- Prove for 1
+_ : inc(⟨⟩ O O O I) ≡ ⟨⟩ O O I O
+_ =
+  begin
+    ⟨⟩ O O I O
+  ∎
+--- Prove for 2
+_ : inc(⟨⟩ O O I O) ≡ ⟨⟩ O O I I
+_ =
+  begin
+    ⟨⟩ O O I I
+  ∎
+--- Prove for 3
+_ : inc(⟨⟩ O O I I) ≡ ⟨⟩ O I O O
+_ =
+  begin
+    ⟨⟩ O I O O
+  ∎
+--- Prove for Bin 4
+_ : inc(⟨⟩ I O O O) ≡ ⟨⟩ I O O I
+_ =
+  begin
+    ⟨⟩ I O O I
+  ∎
+```
+
 
 
 ## Standard library
