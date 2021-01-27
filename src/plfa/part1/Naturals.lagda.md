@@ -1027,6 +1027,41 @@ _ =
   ∎
 ```
 
+```
+--- Convert from Natural to Bin
+to : ℕ → Bin
+to 0 = ⟨⟩ O
+to (suc n) = inc (to n)
+```
+```
+--- Prove 0 through 4
+_ : to 0 ≡ ⟨⟩ O
+_ =
+  begin
+    ⟨⟩ O
+  ∎
+_ : to 1 ≡ ⟨⟩ I
+_ =
+  begin
+    ⟨⟩ I
+  ∎
+_ : to 2 ≡ ⟨⟩ I O
+_ =
+  begin
+    ⟨⟩ I O
+  ∎
+_ : to 3 ≡ ⟨⟩ I I
+_ =
+  begin
+    ⟨⟩ I I
+  ∎
+_ : to 4 ≡ ⟨⟩ I O O
+_ =
+  begin
+    ⟨⟩ I O O
+  ∎
+```
+
 
 
 ## Standard library
