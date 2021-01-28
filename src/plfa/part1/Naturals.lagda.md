@@ -1066,8 +1066,38 @@ _ =
 from : Bin → ℕ
 from ⟨⟩ = 0
 from (⟨⟩ O) = 0
---- from (inc n) = suc (from n)
+from (x O) = 2 * (from x)
+from (x I) = suc (2 * (from x))
 ```
+```
+--- Prove 0 through 4
+_ : from (⟨⟩ O) ≡ 0
+_ =
+  begin
+    0
+  ∎
+_ : from (⟨⟩ I) ≡ 1
+_ =
+  begin
+    1
+  ∎
+_ : from (⟨⟩ I O) ≡ 2
+_ =
+  begin
+    2
+  ∎
+_ : from (⟨⟩ I I) ≡ 3
+_ =
+  begin
+    3
+  ∎
+_ : from (⟨⟩ I O O) ≡ 4
+_ =
+  begin
+    4
+  ∎
+```
+
 
 
 
