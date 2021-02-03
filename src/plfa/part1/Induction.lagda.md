@@ -775,6 +775,7 @@ Begin by typing:
 The question mark indicates that you would like Agda to help with
 filling in that part of the code.  If you type `C-c C-l` (control-c
 followed by control-l), the question mark will be replaced:
+
 ```
 +-assoc2′ : ∀ (m n p : ℕ) → (m + n) + p ≡ m + (n + p)
 +-assoc2′ zero n p = refl
@@ -873,7 +874,9 @@ just apply the previous results which show addition
 is associative and commutative.
 
 ```
--- Your code goes here
++-swap : ∀ (m n p : ℕ) → m + (n + p) ≡ n + (m + p)
++-swap zero n p = refl
++-swap (suc m) n p rewrite +-comm m (n + p) | +-comm m p | +-assoc′ n p m | +-suc′ n (p + m) = refl
 ```
 
 
