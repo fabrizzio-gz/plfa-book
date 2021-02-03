@@ -775,6 +775,11 @@ Begin by typing:
 The question mark indicates that you would like Agda to help with
 filling in that part of the code.  If you type `C-c C-l` (control-c
 followed by control-l), the question mark will be replaced:
+```
++-assoc2′ : ∀ (m n p : ℕ) → (m + n) + p ≡ m + (n + p)
++-assoc2′ zero n p = refl
++-assoc2′ (suc m) n p rewrite +-assoc2′ m n p = refl
+```
 
     +-assoc′ : ∀ (m n p : ℕ) → (m + n) + p ≡ m + (n + p)
     +-assoc′ m n p = { }0
