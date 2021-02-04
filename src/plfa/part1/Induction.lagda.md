@@ -920,7 +920,49 @@ for all naturals `m` and `n`.  As with commutativity of addition,
 you will need to formulate and prove suitable lemmas.
 
 ```
--- Your code goes here
+--- Lemmas
+--- n + zero = 0
+*-zero-right : (n : ℕ) → n * zero ≡ zero
+*-zero-right zero = refl
+*-zero-right (suc n) rewrite *-zero-right n = refl
+--- suc n = n + 1
++-suc-add-one : (n : ℕ) → suc n ≡ n + 1
++-suc-add-one zero = refl
++-suc-add-one (suc n) rewrite +-suc-add-one n = refl
+--- n * 1 = n
+*-unit-mul : (n : ℕ) → n * 1 ≡ n
+*-unit-mul zero = refl
+*-unit-mul (suc n) rewrite *-unit-mul n = refl
+--- a + (b + c) = a + b + c
++-parens-3 : (a b c : ℕ) → a + (b + c) ≡ a + b + c
++-parens-3 zero b c = refl
++-parens-3 (suc a) b c rewrite +-parens-3 a b c = refl
+--- a + b + (c + d) = a + b + c + d
++-parens-4 : (a b c d : ℕ) → a + b + (c + d) ≡ a + b + c + d
++-parens-4 zero b c d rewrite +-parens-3 b c d = refl
++-parens-4 (suc a) b c d rewrite +-parens-4 a b c d = refl
+--- a + (b + c + d) = a + b + c + d
++-add-parens-3 : (a b c d : ℕ) → a + (b + c + d) ≡ a + b + c + d
++-add-parens-3 zero b c d = refl
++-add-parens-3 (suc a) b c d rewrite +-add-parens-3 a b c d = refl
+--- m * ( n + p ) = m * n + m * p
+*-distrib-+-left : (m n p : ℕ) → m * (n + p) ≡ m * n + m * p
+*-distrib-+-left zero n p = refl
+*-distrib-+-left (suc m) n p rewrite *-distrib-+-left m n p | +-swap (n + p) (m * n) (m * p) | +-comm′ n (m * n) | +-parens-4 (m * n) n p (m * p) | +-add-parens-3 (m * n) n p (m * p) = refl
+--- n * 1 = n
+*-iden : (n : ℕ) → n * 1 ≡ n
+*-iden zero = refl
+*-iden (suc n) rewrite *-iden n = refl
+--- n + n * m = n * suc m
+*-fact-1 : (m n : ℕ) → n + n * m ≡ n * suc m
+*-fact-1 zero n rewrite *-zero-right n | *-unit-mul n | +-comm′ n zero = refl
+*-fact-1 (suc m) n rewrite +-suc-add-one m | +-suc-add-one (m + 1) | *-distrib-+-left n m 1 | *-distrib-+-left n (m + 1) 1 | *-distrib-+-left n m 1 | +-parens-3 n (n * m) (n * 1) | +-comm′ n (n * m) | *-iden n = refl
+```
+
+```
+*-comm : (m n : ℕ) → m * n ≡ n * m
+*-comm zero n rewrite *-zero-right n = refl
+*-comm (suc m) n rewrite *-distrib-+ m 1 n | *-comm m n | *-fact-1 m n = refl
 ```
 
 
