@@ -975,7 +975,9 @@ Show
 for all naturals `n`. Did your proof require induction?
 
 ```
--- Your code goes here
+zero-∸ : (n : ℕ) → zero ∸ n ≡ zero
+zero-∸ zero = refl
+zero-∸ (suc n) = refl
 ```
 
 
@@ -988,7 +990,14 @@ Show that monus associates with addition, that is,
 for all naturals `m`, `n`, and `p`.
 
 ```
--- Your code goes here
+--- m ∸ n ∸ p ≡ (m ∸ n) ∸ p
+monus-assoc : ( m n p q : ℕ ) →  m ∸ n ∸ p ∸ q ≡ (m ∸ n) ∸ p ∸ q
+monus-assoc m zero p q = refl
+monus-assoc m (suc n) p q = refl
+--- TODO
+--- ∸-+-assoc : ( m n p : ℕ ) →  m ∸ n ∸ p ≡ m ∸ (n + p)
+--- ∸-+-assoc m zero p = refl
+--- ∸-+-assoc m (suc n) p rewrite +-suc-add-one n | sym (∸-+-assoc m n 1) | sym (+-suc′ n p) | sym (∸-+-assoc m n (suc p)) | +-suc-add-one p | sym (∸-+-assoc m n (p + 1)) | +-comm′ p 1 | ∸-+-assoc (m ∸ n) 1 p = {!!}
 ```
 
 
@@ -1024,7 +1033,31 @@ over bitstrings:
 For each law: if it holds, prove; if not, give a counterexample.
 
 ```
--- Your code goes here
+--- Previous defs and functions
+data Bin : Set where
+  ⟨⟩ : Bin
+  _O : Bin → Bin
+  _I : Bin → Bin
+--- Definition
+inc : Bin → Bin
+inc ⟨⟩ = ⟨⟩
+inc (⟨⟩ O) = ⟨⟩ I
+inc (⟨⟩ I) = ⟨⟩ I O
+inc (n I) = inc(n) O
+inc (n O) = n I
+--- Convert from Natural to Bin
+to : ℕ → Bin
+to 0 = ⟨⟩ O
+to (suc n) = inc (to n)
+--- Convert from Binary to Natural
+from : Bin → ℕ
+from ⟨⟩ = 0
+from (⟨⟩ O) = 0
+from (x O) = 2 * (from x)
+from (x I) = suc (2 * (from x))
+```
+```
+--- from (inc b) ≡ suc (from b)
 ```
 
 
